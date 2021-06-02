@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyCxAieSpxdtzyRRuesH7zWcSraaTwHjVlI",
+            authDomain: "web-developer-3d7db.firebaseapp.com",
+            databaseURL: "https://web-developer-3d7db-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "web-developer-3d7db",
+            storageBucket: "web-developer-3d7db.appspot.com",
+            messagingSenderId: "675554122600",
+            appId: "1:675554122600:web:cb79eb4cbf3d71088e54dd",
+            measurementId: "G-8YDXS10SQ9"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        var database = firebase.database();
+        function writeUserData(userId, name, email, imageUrl) {
+            database.ref('users/' + userId).set({
+                username: name,
+                email: email,
+                profile_picture: imageUrl
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div class="w-full h-full">
+        <div class="bg-local bg-cover bg-no-repeat bg-center w-screen h-screen"
+            style="background-image:url('/pic/background.png');">
+            <div class="flex flex-col">
+                <div class="flex justify-center">
+                    <img class="object-center object-cover w-24 h-24 mt-10" src="pic/logo.png">
+                </div>
+                <div class="flex justify-center text-center text-lg font-semibold">
+                    <a href="#" class="ml-16 mt-5 cursor-pointer">HOME</a>
+                    <a href="#" class="ml-16 mt-5 cursor-pointer">ABOUT US</a>
+                    <a href="#" class="ml-16 mt-5 cursor-pointer">OUR SERVICES</a>
+                    <a href="#" class="ml-16 mt-5 cursor-pointer">PRICING</a>
+                    <a href="#" class="ml-16 mt-5 cursor-pointer">CONTACT</a>
+                </div>
+                <div class="flex flex-col m-20">
+                    <div class="font-medium">Type Something</div>
+                    <div><input
+                            class="border border-black border-transparent focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:border-transparent">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
