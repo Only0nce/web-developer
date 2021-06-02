@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
+
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-database.js"></script>
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-analytics.js"></script>
 
     <script>
         // Your web app's Firebase configuration
@@ -28,16 +28,19 @@
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-        firebase.analytics();
+
 
         var database = firebase.database();
-        function writeUserData(userId, name, email, imageUrl) {
-            database.ref('users/' + userId).set({
-                username: name,
-                email: email,
-                profile_picture: imageUrl
-            });
-        }
+        database.ref().set({
+            user: 0,
+            firstName: "KAN",
+            lastname: "TI",
+            age: 21
+        });
+        var databases = firebase.database().ref();
+        databases.on("value", function (snapshot) {
+            console.log(snapshot.val());
+        });
     </script>
 </head>
 
@@ -58,9 +61,10 @@
                 </div>
                 <div class="flex flex-col m-20">
                     <div class="font-medium">Type Something</div>
-                    <div><input
+                    <div><input type="text" id="email"
                             class="border border-black border-transparent focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:border-transparent">
                     </div>
+                    <button id="send">Send</button>
                 </div>
             </div>
         </div>
