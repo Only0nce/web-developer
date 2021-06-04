@@ -67,51 +67,62 @@
 
         var database = firebase.database();
 
-        $(document).ready(function () {
-            $('#add').on('click', function (event) {
-                event.preventDefault();
-                database.ref("user").set({
-                    user: $('#userId').val(),
-                    firstName: $('#firstname').val(),
-                    lastname: $('#lastname').val(),
-                    age: $('#age').val()
-                });
-            });
-        });
-       /* $(document).ready(function () {
-              $("#add").click(function () {
-                  console.log("Hello");
-                  database.ref().set({
-                      user: 50,
-                      firstName: "jj",
-                      lastname: "op",
-                      age: "5"
-                  });
-              });
-          });*/
-        /*database.ref().set({
-            user: 10,
-            firstName: "only",
-            lastname: "one",
-            age: "40"
-        });
-        var databases = firebase.database().ref();
-        databases.on("value", function (snapshot) {
-            console.log(snapshot.val());
-        });
+        /* $(document).ready(function () {
+             $('#add').on('click', function (event) {
+                 event.preventDefault();
+                 database.ref("user").set({
+                     user: $('#userId').val(),
+                     firstName: $('#firstname').val(),
+                     lastname: $('#lastname').val(),
+                     age: $('#age').val()
+                 });
+             });
+         });
+         $(document).ready(function () {
+             $('#updates').on('click', function (event) {
+                 event.preventDefault();
+                 database.ref().child("data").update({
+                     user: $('#userId').val(),
+                     firstName: $('#firstname').val(),
+                     lastname: $('#lastname').val(),
+                     age: $('#age').val()
+                 });
+             });
+         });
+         $(document).ready(function () {
+             $('#updates').on('click', function (event) {
+                 event.preventDefault();
+                 database.ref("user").child("data").remove({
+                     user: $('#userId').val(),
+                     firstName: $('#firstname').val(),
+                     lastname: $('#lastname').val(),
+                     age: $('#age').val()
+                 });
+             });
+         });*/
+        /* $(document).ready(function () {
+               $("#add").click(function () {
+                   console.log("Hello");
+                   database.ref().set({
+                       user: 50,
+                       firstName: "jj",
+                       lastname: "op",
+                       age: "5"
+                   });
+               });
+           });
+         database.ref().set({
+             user: 10,
+             firstName: "only",
+             lastname: "one",
+             age: "40"
+         });
+         var databases = firebase.database().ref();
+         databases.on("value", function (snapshot) {
+             console.log(snapshot.val());
+         });*/
 
-       //const userId = document.getElementById('userID');
-       const firstname = document.getElementById('firstname');
-       const lastname = document.getElementById('lastname');
-       const age = document.getElementById('age');
-       const add = document.getElementById('add');
-       const update = document.getElementById('update');
-       const delect = document.getElementById('delect');
-
-       document.querySelector('#add').addEventListener('click', () => {
-           const userId = document.getElementById('userID').value;
-           database.set(userId);
-       });*/
+       
     </script>
 </head>
 
@@ -154,6 +165,38 @@
             </div>
         </div>
     </div>
+    <script>
+        const userId = document.getElementById('userId');
+        const firstname = document.getElementById('firstname');
+        const lastname = document.getElementById('lastname');
+        const age = document.getElementById('age');
+        const adds = document.getElementById('add');
+        const update = document.getElementById('update');
+        const delect = document.getElementById('delect');
+
+        adds.addEventListener('click', (e) => {
+            e.preventDefault();
+            database.ref().child(userId.value).set({
+                firstName: firstname.value,
+                lastname: lastname.value,
+                age: age.value
+            });
+        });
+
+        updates.addEventListener('click', (e) => {
+            e.preventDefault();
+            const newData = {
+                age: age.value,
+                firstName: firstname.value,
+                lastname: lastname.value
+            }
+            database.ref().child(userId.value).update(newData);
+        });
+        delects.addEventListener('click', (e) => {
+            e.preventDefault();
+            database.ref().child(userId.value).remove();
+        });
+    </script>
 </body>
 
 </html>
