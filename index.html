@@ -28,101 +28,7 @@
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-
-        /*const database = firebase.database().ref("user");
-        var submitRecommendation = function () {
-
-            // Get input values from each of the form elements
-            var userId = $("#userId").val();
-            var firstname = $("#firstname").val();
-            var lastname = $("#lastname").val();
-            var age = $("#age").val();
-
-            // Push a new recommendation to the database using those values
-            database.set({
-                "user": userId,
-                "first_name": firstname,
-                "last_name": lastname,
-                "age": age
-            });
-        };
-
-        // When the window is fully loaded, call this function.
-        // Note: because we are attaching an event listener to a particular HTML element
-        // in this function, we can't do that until the HTML element in question has
-        // been loaded. Otherwise, we're attaching our listener to nothing, and no code
-        // will run when the submit button is clicked.
-        $(window).load(function () {
-
-            // Find the HTML element with the id recommendationForm, and when the submit
-            // event is triggered on that element, call submitRecommendation.
-            $("#contactForm").submit(submitRecommendation);
-
-        });
-
-
-        /////////////////////////read data///////////////////////////
-        database.on('value', snap => console.log(snap.val()));*/
-
-
         var database = firebase.database();
-
-        /* $(document).ready(function () {
-             $('#add').on('click', function (event) {
-                 event.preventDefault();
-                 database.ref("user").set({
-                     user: $('#userId').val(),
-                     firstName: $('#firstname').val(),
-                     lastname: $('#lastname').val(),
-                     age: $('#age').val()
-                 });
-             });
-         });
-         $(document).ready(function () {
-             $('#updates').on('click', function (event) {
-                 event.preventDefault();
-                 database.ref().child("data").update({
-                     user: $('#userId').val(),
-                     firstName: $('#firstname').val(),
-                     lastname: $('#lastname').val(),
-                     age: $('#age').val()
-                 });
-             });
-         });
-         $(document).ready(function () {
-             $('#updates').on('click', function (event) {
-                 event.preventDefault();
-                 database.ref("user").child("data").remove({
-                     user: $('#userId').val(),
-                     firstName: $('#firstname').val(),
-                     lastname: $('#lastname').val(),
-                     age: $('#age').val()
-                 });
-             });
-         });*/
-        /* $(document).ready(function () {
-               $("#add").click(function () {
-                   console.log("Hello");
-                   database.ref().set({
-                       user: 50,
-                       firstName: "jj",
-                       lastname: "op",
-                       age: "5"
-                   });
-               });
-           });
-         database.ref().set({
-             user: 10,
-             firstName: "only",
-             lastname: "one",
-             age: "40"
-         });
-         var databases = firebase.database().ref();
-         databases.on("value", function (snapshot) {
-             console.log(snapshot.val());
-         });*/
-
-       
     </script>
 </head>
 
@@ -164,6 +70,32 @@
                 </div>
             </div>
         </div>
+        <div class="p-10">
+            <!--Card 1-->
+            <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                <!--<div id="addPic" class="w-full h-60 py-16 px-36">
+                    <input type="file">
+                    <img class="w-full h-60 py-16 px-36 cursor-pointer" src="pic/add.jpg" alt="add">
+                </div>-->
+                <form runat="server" class="w-full h-60">
+                    <div class="flex flex-col justify-items-center">
+                        <div><img class="w-56 h-56 bg-center ml-20" id="blah" /></div>
+                        <div><input class="ml-20" accept="image/*" type='file' id="imgInp" /></div>
+                    </div>
+                </form>
+                <div class="px-6 py-4">
+                    <input type="text" placeholder="Product's name" id="product"
+                        class="border-2 rounded-lg border-gray-400 text-gray-700 text-base focus:outline-none focus:ring focus:border-blue-300" />
+                    <input type="text" placeholder="Describe" id="describe"
+                        class="border-2 rounded-lg border-gray-400 text-gray-700 text-base focus:outline-none focus:ring focus:border-blue-300" />
+                </div>
+                <div class="px-6 pb-2">
+                    <button class="w-32 ring-2 ring-indigo-300" id="submit">
+                        submit
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
     <script>
         const userId = document.getElementById('userId');
@@ -195,6 +127,36 @@
         delects.addEventListener('click', (e) => {
             e.preventDefault();
             database.ref().child(userId.value).remove();
+        });
+    </script>
+    <script>
+        imgInp.onchange = evt => {
+            const [file] = imgInp.files
+            if (file) {
+                blah.src = URL.createObjectURL(file)
+            }
+        }
+    </script>
+    <script>
+        var d = new Date();
+        var dateNow = d.toLocaleDateString();
+        var time = d.toLocaleTimeString();
+        const submit = document.getElementById('submit');
+        const product = document.getElementById('product');
+        submit.addEventListener('click', (e) => {
+            e.preventDefault();
+            database.ref("shop_online").child("test000000002").set({
+                "category": [product.value, "product.value"],
+                "date_down": dateNow,
+                "image": "none",
+                "key_name": "ONLY",
+                "like": "none",
+                "name": product.value,
+                "price": 100,
+                "time_down": time,
+                "type": "none",
+                "unlike": "none"
+            });
         });
     </script>
 </body>
